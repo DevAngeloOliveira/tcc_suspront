@@ -194,7 +194,7 @@ O sistema está organizado nos seguintes módulos principais:
 
 Este projeto foi desenvolvido como Trabalho de Conclusão de Curso (TCC) por:
 
-- **Gabriel Ângelo Oliveira Silva** - *Desenvolvedor* - [GitHub](https://github.com/seu-usuario)
+- **Gabriel Ângelo Oliveira Silva** - *Desenvolvedor* - [GitHub](https://github.com/DevAngeloOliveira)
 - **Thiago Rodrigues** - *Professor* - Centro Universitário de João Pessoa
 
 ## Licença
