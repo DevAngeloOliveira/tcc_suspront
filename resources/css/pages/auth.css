@@ -1,0 +1,134 @@
+/**
+ * SusPront - Auth Styles
+ * Estilos específicos para páginas de autenticação
+ */
+
+.auth-container {
+    min-height: 100vh;
+    background: linear-gradient(135deg, var(--medical-primary) 0%, var(--sus-blue) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.auth-card {
+    background: white;
+    border-radius: var(--card-border-radius);
+    box-shadow: var(--shadow-xl);
+    overflow: hidden;
+    width: 100%;
+    max-width: 400px;
+}
+
+.auth-header {
+    background: linear-gradient(135deg, var(--medical-primary) 0%, var(--medical-secondary) 100%);
+    color: white;
+    padding: 2rem;
+    text-align: center;
+}
+
+.auth-logo {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    margin: 0 auto 1rem;
+}
+
+.auth-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.auth-subtitle {
+    font-size: 0.9rem;
+    opacity: 0.9;
+    margin-top: 0.5rem;
+}
+
+.auth-body {
+    padding: 2rem;
+}
+
+.auth-form .form-group {
+    margin-bottom: 1.5rem;
+}
+
+.auth-form .form-label {
+    font-weight: 600;
+    color: var(--sus-dark);
+    margin-bottom: 0.5rem;
+}
+
+.auth-form .form-control {
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
+}
+
+.auth-form .form-control:focus {
+    border-color: var(--medical-primary);
+    box-shadow: 0 0 0 0.2rem rgba(8, 145, 178, 0.25);
+}
+
+.auth-btn {
+    width: 100%;
+    background: var(--medical-primary);
+    border: none;
+    color: white;
+    padding: 0.875rem;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+}
+
+.auth-btn:hover {
+    background: var(--sus-blue);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-lg);
+}
+
+.auth-footer {
+    padding: 1.5rem 2rem;
+    background: rgba(0, 0, 0, 0.02);
+    text-align: center;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.auth-footer a {
+    color: var(--medical-primary);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.auth-footer a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 576px) {
+    .auth-container {
+        padding: 1rem;
+    }
+
+    .auth-header {
+        padding: 1.5rem;
+    }
+
+    .auth-body {
+        padding: 1.5rem;
+    }
+
+    .auth-footer {
+        padding: 1rem 1.5rem;
+    }
+}

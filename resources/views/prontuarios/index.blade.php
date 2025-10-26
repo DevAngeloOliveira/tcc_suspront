@@ -1,12 +1,12 @@
 @extends('layouts.modern')
 
-@section('title', 'Receitas Médicas')
+@section('title', 'Prontuários')
 
 @section('breadcrumb')
     <i class="fas fa-home"></i>
     <span>Dashboard</span>
     <i class="fas fa-chevron-right"></i>
-    <span>Receitas</span>
+    <span>Prontuários</span>
 @endsection
 
 @section('content')
@@ -14,15 +14,15 @@
         <div class="d-flex justify-content-between align-items-center">
             <div>
                 <h1 class="page-title">
-                    <i class="fas fa-prescription me-2"></i>
-                    Receitas Médicas
+                    <i class="fas fa-file-medical me-2"></i>
+                    Prontuários Médicos
                 </h1>
-                <p class="page-subtitle">Gerencie prescrições e receituários médicos</p>
+                <p class="page-subtitle">Gerencie os prontuários e histórico médico dos pacientes</p>
             </div>
             <div>
-                <a href="{{ route('receitas.create') }}" class="btn btn-primary">
+                <a href="{{ route('prontuarios.create') }}" class="btn btn-primary">
                     <i class="fas fa-plus me-2"></i>
-                    Nova Receita
+                    Novo Prontuário
                 </a>
             </div>
         </div>
@@ -34,11 +34,11 @@
             <div class="stats-card primary">
                 <div class="stats-card-body">
                     <div class="stats-card-icon">
-                        <i class="fas fa-prescription"></i>
+                        <i class="fas fa-file-medical"></i>
                     </div>
                     <div class="stats-card-info">
                         <div class="stats-card-number">{{ $estatisticas['total'] ?? 0 }}</div>
-                        <div class="stats-card-label">Total de Receitas</div>
+                        <div class="stats-card-label">Total de Prontuários</div>
                     </div>
                 </div>
             </div>
@@ -51,20 +51,7 @@
                     </div>
                     <div class="stats-card-info">
                         <div class="stats-card-number">{{ $estatisticas['hoje'] ?? 0 }}</div>
-                        <div class="stats-card-label">Prescritas Hoje</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="stats-card warning">
-                <div class="stats-card-body">
-                    <div class="stats-card-icon">
-                        <i class="fas fa-pills"></i>
-                    </div>
-                    <div class="stats-card-info">
-                        <div class="stats-card-number">{{ $estatisticas['medicamentos_diferentes'] ?? 0 }}</div>
-                        <div class="stats-card-label">Medicamentos Diferentes</div>
+                        <div class="stats-card-label">Criados Hoje</div>
                     </div>
                 </div>
             </div>
@@ -73,11 +60,24 @@
             <div class="stats-card info">
                 <div class="stats-card-body">
                     <div class="stats-card-icon">
-                        <i class="fas fa-print"></i>
+                        <i class="fas fa-edit"></i>
                     </div>
                     <div class="stats-card-info">
-                        <div class="stats-card-number">{{ $estatisticas['impressas'] ?? 0 }}</div>
-                        <div class="stats-card-label">Impressas</div>
+                        <div class="stats-card-number">{{ $estatisticas['recentes'] ?? 0 }}</div>
+                        <div class="stats-card-label">Atualizados Recentemente</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="stats-card warning">
+                <div class="stats-card-body">
+                    <div class="stats-card-icon">
+                        <i class="fas fa-user-patients"></i>
+                    </div>
+                    <div class="stats-card-info">
+                        <div class="stats-card-number">{{ $estatisticas['pacientes_ativos'] ?? 0 }}</div>
+                        <div class="stats-card-label">Pacientes com Prontuário</div>
                     </div>
                 </div>
             </div>
@@ -91,7 +91,7 @@
                 <div class="col-md-3">
                     <label for="busca" class="form-label">Buscar</label>
                     <input type="text" class="form-control" id="busca" name="busca" value="{{ request('busca') }}"
-                        placeholder="Medicamento, paciente, médico...">
+                        placeholder="Nome do paciente, diagnóstico...">
                 </div>
                 <div class="col-md-2">
                     <label for="medico" class="form-label">Médico</label>
@@ -123,8 +123,7 @@
                         </option>
                         <option value="paciente" {{ request('ordenar') == 'paciente' ? 'selected' : '' }}>Paciente A-Z
                         </option>
-                        <option value="medicamento" {{ request('ordenar') == 'medicamento' ? 'selected' : '' }}>Medicamento
-                            A-Z</option>
+                        <option value="medico" {{ request('ordenar') == 'medico' ? 'selected' : '' }}>Médico A-Z</option>
                     </select>
                 </div>
                 <div class="col-md-1 d-flex align-items-end">
@@ -136,70 +135,74 @@
         </div>
     </div>
 
-    <!-- Lista de Receitas -->
+    <!-- Lista de Prontuários -->
     <div class="card">
         <div class="card-body">
-            @if ($receitas->count() > 0)
+            @if ($prontuarios->count() > 0)
                 <div class="table-responsive">
                     <table class="table table-hover">
                         <thead>
                             <tr>
                                 <th>Data</th>
                                 <th>Paciente</th>
-                                <th>Medicamento</th>
-                                <th>Dosagem</th>
-                                <th>Frequência</th>
                                 <th>Médico</th>
+                                <th>Queixa Principal</th>
+                                <th>Diagnóstico</th>
                                 <th>Consulta</th>
                                 <th width="120">Ações</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($receitas as $receita)
+                            @foreach ($prontuarios as $prontuario)
                                 <tr>
                                     <td>
-                                        <div class="fw-bold">{{ $receita->created_at->format('d/m/Y') }}</div>
-                                        <small class="text-muted">{{ $receita->created_at->format('H:i') }}</small>
+                                        <div class="fw-bold">{{ $prontuario->created_at->format('d/m/Y') }}</div>
+                                        <small class="text-muted">{{ $prontuario->created_at->format('H:i') }}</small>
                                     </td>
                                     <td>
                                         <div class="d-flex align-items-center">
                                             <div class="avatar-sm me-3">
                                                 <div class="avatar-title rounded-circle bg-primary">
-                                                    {{ substr($receita->paciente->nome, 0, 1) }}
+                                                    {{ substr($prontuario->paciente->nome, 0, 1) }}
                                                 </div>
                                             </div>
                                             <div>
-                                                <div class="fw-bold">{{ $receita->paciente->nome }}</div>
-                                                <small class="text-muted">{{ $receita->paciente->cpf }}</small>
+                                                <div class="fw-bold">{{ $prontuario->paciente->nome }}</div>
+                                                <small class="text-muted">{{ $prontuario->paciente->cpf }}</small>
                                             </div>
                                         </div>
                                     </td>
                                     <td>
-                                        <div class="fw-bold">{{ $receita->medicamento }}</div>
-                                        @if ($receita->principio_ativo)
-                                            <small class="text-muted">{{ $receita->principio_ativo }}</small>
-                                        @endif
-                                    </td>
-                                    <td>
-                                        <span class="badge bg-info">{{ $receita->dosagem }}</span>
-                                    </td>
-                                    <td>
-                                        <span class="badge bg-secondary">{{ $receita->frequencia }}</span>
-                                        @if ($receita->duracao)
-                                            <br><small class="text-muted">{{ $receita->duracao }}</small>
-                                        @endif
-                                    </td>
-                                    <td>
                                         <div>
-                                            <div class="fw-bold">{{ $receita->medico->nome }}</div>
-                                            <small class="text-muted">{{ $receita->medico->especialidade }}</small>
+                                            <div class="fw-bold">{{ $prontuario->medico->nome }}</div>
+                                            <small class="text-muted">{{ $prontuario->medico->especialidade }}</small>
                                         </div>
                                     </td>
                                     <td>
-                                        @if ($receita->consulta)
-                                            <a href="{{ route('consultas.show', $receita->consulta) }}"
+                                        @if ($prontuario->queixa_principal)
+                                            <span class="text-truncate" style="max-width: 200px; display: block;"
+                                                title="{{ $prontuario->queixa_principal }}">
+                                                {{ $prontuario->queixa_principal }}
+                                            </span>
+                                        @else
+                                            <span class="text-muted">-</span>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if ($prontuario->diagnostico)
+                                            <span class="text-truncate" style="max-width: 200px; display: block;"
+                                                title="{{ $prontuario->diagnostico }}">
+                                                {{ $prontuario->diagnostico }}
+                                            </span>
+                                        @else
+                                            <span class="text-muted">-</span>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if ($prontuario->consulta)
+                                            <a href="{{ route('consultas.show', $prontuario->consulta) }}"
                                                 class="btn btn-outline-info btn-sm">
-                                                #{{ $receita->consulta->id }}
+                                                Consulta #{{ $prontuario->consulta->id }}
                                             </a>
                                         @else
                                             <span class="text-muted">-</span>
@@ -214,14 +217,14 @@
                                             <ul class="dropdown-menu">
                                                 <li>
                                                     <a class="dropdown-item"
-                                                        href="{{ route('receitas.show', $receita) }}">
+                                                        href="{{ route('prontuarios.show', $prontuario) }}">
                                                         <i class="fas fa-eye me-2"></i>
                                                         Visualizar
                                                     </a>
                                                 </li>
                                                 <li>
                                                     <a class="dropdown-item"
-                                                        href="{{ route('receitas.edit', $receita) }}">
+                                                        href="{{ route('prontuarios.edit', $prontuario) }}">
                                                         <i class="fas fa-edit me-2"></i>
                                                         Editar
                                                     </a>
@@ -230,32 +233,21 @@
                                                     <hr class="dropdown-divider">
                                                 </li>
                                                 <li>
-                                                    <a class="dropdown-item text-primary"
-                                                        href="{{ route('receitas.imprimir', $receita) }}"
-                                                        target="_blank">
+                                                    <button class="dropdown-item text-primary"
+                                                        onclick="imprimirProntuario({{ $prontuario->id }})">
                                                         <i class="fas fa-print me-2"></i>
                                                         Imprimir
-                                                    </a>
+                                                    </button>
                                                 </li>
-                                                @if ($receita->consulta)
+                                                @if ($prontuario->consulta)
                                                     <li>
                                                         <a class="dropdown-item text-info"
-                                                            href="{{ route('consultas.show', $receita->consulta) }}">
+                                                            href="{{ route('consultas.show', $prontuario->consulta) }}">
                                                             <i class="fas fa-calendar-check me-2"></i>
                                                             Ver Consulta
                                                         </a>
                                                     </li>
                                                 @endif
-                                                <li>
-                                                    <hr class="dropdown-divider">
-                                                </li>
-                                                <li>
-                                                    <button class="dropdown-item text-danger"
-                                                        onclick="confirmarExclusao({{ $receita->id }})">
-                                                        <i class="fas fa-trash me-2"></i>
-                                                        Excluir
-                                                    </button>
-                                                </li>
                                             </ul>
                                         </div>
                                     </td>
@@ -268,69 +260,39 @@
                 <!-- Paginação -->
                 <div class="d-flex justify-content-between align-items-center mt-3">
                     <div class="text-muted">
-                        Mostrando {{ $receitas->firstItem() }} a {{ $receitas->lastItem() }}
-                        de {{ $receitas->total() }} resultados
+                        Mostrando {{ $prontuarios->firstItem() }} a {{ $prontuarios->lastItem() }}
+                        de {{ $prontuarios->total() }} resultados
                     </div>
-                    {{ $receitas->links() }}
+                    {{ $prontuarios->links() }}
                 </div>
             @else
                 <div class="text-center py-5">
                     <div class="mb-3">
-                        <i class="fas fa-prescription fa-3x text-muted"></i>
+                        <i class="fas fa-file-medical fa-3x text-muted"></i>
                     </div>
-                    <h5 class="text-muted">Nenhuma receita encontrada</h5>
+                    <h5 class="text-muted">Nenhum prontuário encontrado</h5>
                     <p class="text-muted mb-4">
                         @if (request()->hasAny(['busca', 'medico', 'data_inicio', 'data_fim']))
                             Tente ajustar os filtros ou
                         @else
-                            Comece criando uma receita para ver a lista aqui.
+                            Comece criando um prontuário para ver a lista aqui.
                         @endif
                     </p>
-                    <a href="{{ route('receitas.create') }}" class="btn btn-primary">
+                    <a href="{{ route('prontuarios.create') }}" class="btn btn-primary">
                         <i class="fas fa-plus me-2"></i>
-                        Prescrever Primeira Receita
+                        Criar Primeiro Prontuário
                     </a>
                 </div>
             @endif
-        </div>
-    </div>
-
-    <!-- Modal de Confirmação de Exclusão -->
-    <div class="modal fade" id="modalExclusao" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Confirmar Exclusão</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="text-center">
-                        <i class="fas fa-exclamation-triangle fa-3x text-warning mb-3"></i>
-                        <h5>Tem certeza que deseja excluir esta receita?</h5>
-                        <p class="text-muted">Esta ação não pode ser desfeita.</p>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <form id="formExclusao" method="POST" style="display: inline;">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger">Excluir Receita</button>
-                    </form>
-                </div>
-            </div>
         </div>
     </div>
 @endsection
 
 @section('scripts')
     <script>
-        function confirmarExclusao(id) {
-            const form = document.getElementById('formExclusao');
-            form.action = `/receitas/${id}`;
-
-            const modal = new bootstrap.Modal(document.getElementById('modalExclusao'));
-            modal.show();
+        function imprimirProntuario(id) {
+            // Abrir página de impressão do prontuário
+            window.open(`/prontuarios/${id}/imprimir`, '_blank');
         }
     </script>
 @endsection

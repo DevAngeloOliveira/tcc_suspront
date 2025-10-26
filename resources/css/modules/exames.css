@@ -1,0 +1,440 @@
+/**
+ * SusPront - Exames Module Styles
+ * Estilos específicos para o módulo de exames
+ */
+
+/* Container do módulo exames */
+.exames-container {
+    padding: var(--content-padding);
+}
+
+/* Lista de exames */
+.exames-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.exame-card {
+    background: white;
+    border-radius: var(--card-border-radius);
+    box-shadow: var(--shadow-md);
+    transition: all 0.3s ease;
+    border: none;
+    overflow: hidden;
+    position: relative;
+}
+
+.exame-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-xl);
+}
+
+/* Indicador de tipo de exame */
+.exame-tipo-indicator {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    z-index: 2;
+}
+
+.exame-tipo-indicator.laboratorio {
+    background: var(--medical-info);
+}
+
+.exame-tipo-indicator.imagem {
+    background: var(--medical-warning);
+}
+
+.exame-tipo-indicator.cardiologico {
+    background: var(--medical-danger);
+}
+
+.exame-tipo-indicator.neurологico {
+    background: var(--medical-success);
+}
+
+.exame-header {
+    background: linear-gradient(135deg, var(--medical-primary) 0%, var(--medical-secondary) 100%);
+    color: white;
+    padding: 1.25rem;
+    position: relative;
+}
+
+.exame-codigo {
+    font-size: 0.85rem;
+    font-weight: 600;
+    opacity: 0.9;
+    margin: 0;
+}
+
+.exame-nome {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 0.25rem 0 0.75rem 0;
+    line-height: 1.3;
+}
+
+.exame-tipo {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    display: inline-block;
+}
+
+.exame-body {
+    padding: 1.25rem;
+}
+
+.exame-info {
+    margin-bottom: 1rem;
+}
+
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.info-row:last-child {
+    margin-bottom: 0;
+}
+
+.info-label {
+    color: var(--bs-gray-600);
+    font-weight: 500;
+}
+
+.info-value {
+    color: var(--sus-dark);
+    font-weight: 600;
+}
+
+/* Status badges para exames */
+.status-exame {
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-align: center;
+}
+
+.status-solicitado {
+    background: rgba(37, 99, 235, 0.1);
+    color: var(--medical-info);
+    border: 1px solid rgba(37, 99, 235, 0.2);
+}
+
+.status-coletado {
+    background: rgba(217, 119, 6, 0.1);
+    color: var(--medical-warning);
+    border: 1px solid rgba(217, 119, 6, 0.2);
+}
+
+.status-pronto {
+    background: rgba(5, 150, 105, 0.1);
+    color: var(--medical-success);
+    border: 1px solid rgba(5, 150, 105, 0.2);
+}
+
+.status-cancelado {
+    background: rgba(220, 38, 38, 0.1);
+    color: var(--medical-danger);
+    border: 1px solid rgba(220, 38, 38, 0.2);
+}
+
+/* Prioridade do exame */
+.prioridade-badge {
+    padding: 0.25rem 0.5rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.prioridade-normal {
+    background: rgba(107, 114, 128, 0.1);
+    color: var(--bs-gray-600);
+}
+
+.prioridade-urgente {
+    background: rgba(217, 119, 6, 0.1);
+    color: var(--medical-warning);
+}
+
+.prioridade-emergencia {
+    background: rgba(220, 38, 38, 0.1);
+    color: var(--medical-danger);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+/* Formulário de exames */
+.exame-form {
+    background: white;
+    border-radius: var(--card-border-radius);
+    box-shadow: var(--shadow-md);
+    padding: 2rem;
+    margin-top: 1.5rem;
+}
+
+.tipo-exame-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.tipo-exame-option {
+    background: white;
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 1rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.tipo-exame-option:hover {
+    border-color: var(--medical-primary);
+    background: rgba(8, 145, 178, 0.05);
+}
+
+.tipo-exame-option.selected {
+    border-color: var(--medical-primary);
+    background: rgba(8, 145, 178, 0.1);
+    color: var(--medical-primary);
+}
+
+.tipo-exame-option i {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+/* Detalhes do exame */
+.exame-details {
+    background: white;
+    border-radius: var(--card-border-radius);
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+}
+
+.exame-details-header {
+    background: linear-gradient(135deg, var(--medical-primary) 0%, var(--sus-blue) 100%);
+    color: white;
+    padding: 2rem;
+    text-align: center;
+    position: relative;
+}
+
+.exame-details-codigo {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.exame-details-nome {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.exame-details-tipo {
+    font-size: 1rem;
+    opacity: 0.9;
+    margin-top: 0.5rem;
+}
+
+.exame-details-body {
+    padding: 2rem;
+}
+
+/* Resultados do exame */
+.resultados-section {
+    background: rgba(8, 145, 178, 0.05);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-left: 4px solid var(--medical-primary);
+}
+
+.resultados-title {
+    color: var(--sus-blue);
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.resultado-item {
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 6px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    gap: 1rem;
+    align-items: center;
+}
+
+.resultado-item:last-child {
+    margin-bottom: 0;
+}
+
+.resultado-parametro {
+    font-weight: 600;
+    color: var(--sus-dark);
+}
+
+.resultado-valor {
+    font-weight: 600;
+    font-size: 1.1rem;
+    text-align: center;
+}
+
+.resultado-referencia {
+    font-size: 0.85rem;
+    color: var(--bs-gray-600);
+    text-align: right;
+}
+
+.resultado-normal {
+    color: var(--medical-success);
+}
+
+.resultado-alterado {
+    color: var(--medical-danger);
+}
+
+.resultado-limite {
+    color: var(--medical-warning);
+}
+
+/* Anexos do exame */
+.anexos-section {
+    margin-top: 2rem;
+}
+
+.anexos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.anexo-item {
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 8px;
+    padding: 1rem;
+    text-align: center;
+    transition: all 0.2s ease;
+}
+
+.anexo-item:hover {
+    border-color: var(--medical-primary);
+    box-shadow: var(--shadow-sm);
+}
+
+.anexo-icon {
+    font-size: 2rem;
+    color: var(--medical-primary);
+    margin-bottom: 0.5rem;
+}
+
+.anexo-nome {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--sus-dark);
+    margin-bottom: 0.25rem;
+}
+
+.anexo-tamanho {
+    font-size: 0.8rem;
+    color: var(--bs-gray-600);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .exames-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .tipo-exame-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    }
+
+    .exame-form {
+        padding: 1.5rem;
+    }
+
+    .exame-details-header {
+        padding: 1.5rem;
+    }
+
+    .exame-details-body {
+        padding: 1.5rem;
+    }
+
+    .resultado-item {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .anexos-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+}
+
+@media (max-width: 576px) {
+    .exames-container {
+        padding: 1rem;
+    }
+
+    .exame-card {
+        margin-bottom: 1rem;
+    }
+
+    .exame-form {
+        padding: 1rem;
+    }
+
+    .exame-details-header {
+        padding: 1rem;
+    }
+
+    .exame-details-body {
+        padding: 1rem;
+    }
+
+    .tipo-exame-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .anexos-grid {
+        grid-template-columns: 1fr;
+    }
+}

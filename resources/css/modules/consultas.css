@@ -1,0 +1,405 @@
+/**
+ * SusPront - Consultas Module Styles
+ * Estilos específicos para o módulo de consultas
+ */
+
+/* Container do módulo consultas */
+.consultas-container {
+    padding: var(--content-padding);
+}
+
+/* Lista de consultas */
+.consultas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.consulta-card {
+    background: white;
+    border-radius: var(--card-border-radius);
+    box-shadow: var(--shadow-md);
+    transition: all 0.3s ease;
+    border: none;
+    overflow: hidden;
+    position: relative;
+}
+
+.consulta-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-xl);
+}
+
+/* Status da consulta */
+.consulta-status-indicator {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 50px 50px 0;
+}
+
+.consulta-status-indicator.agendada {
+    border-color: transparent var(--medical-info) transparent transparent;
+}
+
+.consulta-status-indicator.em-andamento {
+    border-color: transparent var(--medical-warning) transparent transparent;
+}
+
+.consulta-status-indicator.concluida {
+    border-color: transparent var(--medical-success) transparent transparent;
+}
+
+.consulta-status-indicator.cancelada {
+    border-color: transparent var(--medical-danger) transparent transparent;
+}
+
+.consulta-header {
+    background: linear-gradient(135deg, var(--medical-primary) 0%, var(--medical-secondary) 100%);
+    color: white;
+    padding: 1.25rem;
+    position: relative;
+}
+
+.consulta-data {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.consulta-hora {
+    font-size: 0.9rem;
+    opacity: 0.9;
+    margin-top: 0.25rem;
+}
+
+.consulta-tipo {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    margin-top: 0.75rem;
+    display: inline-block;
+}
+
+.consulta-body {
+    padding: 1.25rem;
+}
+
+.paciente-info {
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.paciente-nome {
+    font-weight: 600;
+    color: var(--sus-dark);
+    font-size: 1rem;
+    margin: 0;
+}
+
+.paciente-cpf {
+    font-size: 0.85rem;
+    color: var(--bs-gray-600);
+    margin-top: 0.25rem;
+}
+
+.medico-info {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.medico-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--medical-primary);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.medico-details h6 {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--sus-dark);
+}
+
+.medico-especialidade {
+    font-size: 0.8rem;
+    color: var(--bs-gray-600);
+    margin-top: 0.1rem;
+}
+
+/* Status badges */
+.status-consulta {
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-align: center;
+}
+
+.status-agendada {
+    background: rgba(37, 99, 235, 0.1);
+    color: var(--medical-info);
+    border: 1px solid rgba(37, 99, 235, 0.2);
+}
+
+.status-em-andamento {
+    background: rgba(217, 119, 6, 0.1);
+    color: var(--medical-warning);
+    border: 1px solid rgba(217, 119, 6, 0.2);
+}
+
+.status-concluida {
+    background: rgba(5, 150, 105, 0.1);
+    color: var(--medical-success);
+    border: 1px solid rgba(5, 150, 105, 0.2);
+}
+
+.status-cancelada {
+    background: rgba(220, 38, 38, 0.1);
+    color: var(--medical-danger);
+    border: 1px solid rgba(220, 38, 38, 0.2);
+}
+
+/* Formulário de consulta */
+.consulta-form {
+    background: white;
+    border-radius: var(--card-border-radius);
+    box-shadow: var(--shadow-md);
+    padding: 2rem;
+    margin-top: 1.5rem;
+}
+
+.datetime-picker {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+/* Detalhes da consulta */
+.consulta-details {
+    background: white;
+    border-radius: var(--card-border-radius);
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+}
+
+.details-header {
+    background: linear-gradient(135deg, var(--medical-primary) 0%, var(--sus-blue) 100%);
+    color: white;
+    padding: 2rem;
+    text-align: center;
+    position: relative;
+}
+
+.consulta-id {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.consulta-datetime {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.consulta-tipo-header {
+    font-size: 1rem;
+    opacity: 0.9;
+    margin-top: 0.5rem;
+}
+
+.details-tabs {
+    background: rgba(0, 0, 0, 0.02);
+    padding: 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.nav-tabs .nav-link {
+    border: none;
+    color: var(--bs-gray-600);
+    font-weight: 500;
+    padding: 1rem 1.5rem;
+    transition: all 0.2s ease;
+}
+
+.nav-tabs .nav-link.active {
+    background: white;
+    color: var(--medical-primary);
+    border-bottom: 3px solid var(--medical-primary);
+}
+
+.nav-tabs .nav-link:hover:not(.active) {
+    background: rgba(8, 145, 178, 0.05);
+    color: var(--medical-primary);
+}
+
+.tab-content {
+    padding: 2rem;
+}
+
+/* Evolução da consulta */
+.evolucao-section {
+    background: rgba(8, 145, 178, 0.05);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-left: 4px solid var(--medical-primary);
+}
+
+.evolucao-title {
+    color: var(--sus-blue);
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.anamnese-text,
+.exame-fisico-text,
+.diagnostico-text,
+.prescricao-text {
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 6px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    min-height: 120px;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* Timeline de consultas */
+.consultas-timeline {
+    position: relative;
+    padding-left: 2rem;
+}
+
+.consultas-timeline::before {
+    content: '';
+    position: absolute;
+    left: 10px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--medical-primary);
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 2rem;
+    background: white;
+    border-radius: 8px;
+    padding: 1rem;
+    box-shadow: var(--shadow-sm);
+}
+
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -15px;
+    top: 1rem;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--medical-primary);
+    border: 3px solid white;
+    box-shadow: 0 0 0 2px var(--medical-primary);
+}
+
+.timeline-date {
+    font-weight: 600;
+    color: var(--medical-primary);
+    font-size: 0.9rem;
+}
+
+.timeline-content {
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--sus-dark);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .consultas-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .datetime-picker {
+        grid-template-columns: 1fr;
+    }
+
+    .consulta-form {
+        padding: 1.5rem;
+    }
+
+    .details-header {
+        padding: 1.5rem;
+    }
+
+    .tab-content {
+        padding: 1.5rem;
+    }
+
+    .nav-tabs .nav-link {
+        padding: 0.75rem 1rem;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .consultas-container {
+        padding: 1rem;
+    }
+
+    .consulta-card {
+        margin-bottom: 1rem;
+    }
+
+    .consulta-form {
+        padding: 1rem;
+    }
+
+    .details-header {
+        padding: 1rem;
+    }
+
+    .tab-content {
+        padding: 1rem;
+    }
+
+    .consultas-timeline {
+        padding-left: 1.5rem;
+    }
+
+    .timeline-item::before {
+        left: -10px;
+    }
+}

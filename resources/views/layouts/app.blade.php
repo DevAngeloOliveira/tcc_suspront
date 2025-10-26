@@ -109,6 +109,7 @@
     </style>
 
     @yield('styles')
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
 <body>
@@ -166,7 +167,7 @@
                             </a>
                         </li>
 
-                        @if (auth()->user()->tipo == 'admin' || auth()->user()->tipo == 'atendente')
+                        @if (auth()->check() && (auth()->user()->tipo == 'admin' || auth()->user()->tipo == 'atendente'))
                             <li class="nav-item">
                                 <a href="{{ route('medicos.index') }}"
                                     class="nav-link {{ request()->routeIs('medicos.*') ? 'active' : '' }}">
@@ -175,7 +176,7 @@
                             </li>
                         @endif
 
-                        @if (auth()->user()->tipo == 'admin')
+                        @if (auth()->check() && auth()->user()->tipo == 'admin')
                             <li class="nav-item">
                                 <a href="{{ route('atendentes.index') }}"
                                     class="nav-link {{ request()->routeIs('atendentes.*') ? 'active' : '' }}">
@@ -195,10 +196,10 @@
                     <div class="user-info">
                         <div class="d-flex align-items-center mb-2">
                             <i class="fas fa-user-circle me-2"></i>
-                            <span>{{ auth()->user()->name }}</span>
+                            <span>{{ auth()->check() ? auth()->user()->name : 'Usuário' }}</span>
                         </div>
                         <div class="d-flex justify-content-between">
-                            <small class="text-capitalize">{{ auth()->user()->tipo }}</small>
+                            <small class="text-capitalize">{{ auth()->check() ? auth()->user()->tipo : '' }}</small>
                             <form action="{{ route('logout') }}" method="POST">
                                 @csrf
                                 <button type="submit" class="btn btn-sm btn-link p-0 text-white">
