@@ -1,0 +1,97 @@
+/**
+ * SusPront - Variables & Root Styles
+ * Variáveis CSS e configurações globais do sistema
+ */
+
+:root {
+    /* Cores principais do SUS */
+    --sus-blue: #2F74B5;
+    --sus-green: #19883F;
+    --sus-yellow: #FFCC29;
+    --sus-light: #F5F5F5;
+    --sus-dark: #333333;
+
+    /* Cores modernas para interface médica */
+    --medical-primary: #0891b2;
+    --medical-secondary: #06b6d4;
+    --medical-success: #059669;
+    --medical-warning: #d97706;
+    --medical-danger: #dc2626;
+    --medical-info: #2563eb;
+
+    /* Dimensões da sidebar */
+    --sidebar-width: 250px;
+    --sidebar-collapsed-width: 70px;
+
+    /* Cores para estatísticas */
+    --stat-primary: #4e73df;
+    --stat-success: #1cc88a;
+    --stat-info: #36b9cc;
+    --stat-warning: #f6c23e;
+    --stat-danger: #e74a3b;
+
+    /* Spacing e medidas */
+    --content-padding: 1.5rem;
+    --card-border-radius: 12px;
+    --sidebar-transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    /* Sombras */
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+
+    /* Z-index layers */
+    --z-navbar: 1040;
+    --z-sidebar: 1050;
+    --z-sidebar-mobile: 1060;
+    --z-overlay: 1055;
+    --z-modal: 1070;
+    --z-tooltip: 1080;
+}
+
+/* Tema escuro */
+[data-bs-theme="dark"] {
+    --sus-light: #333333;
+    --sus-dark: #F5F5F5;
+    --medical-primary: #0ea5e9;
+    --medical-secondary: #38bdf8;
+}
+
+/* Reset básico para o sistema médico */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+    line-height: 1.6;
+    color: var(--sus-dark);
+    background-color: var(--sus-light);
+}
+
+/* Scrollbar personalizada */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--medical-primary);
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--medical-secondary);
+}
+
+/* Suporte para Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--medical-primary) rgba(0, 0, 0, 0.1);
+}

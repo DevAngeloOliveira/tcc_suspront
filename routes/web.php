@@ -27,8 +27,8 @@ Route::post('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logou
 
 // Rotas autenticadas
 Route::middleware(['auth'])->group(function () {
-    // Dashboard (Livewire)
-    Route::get('/dashboard', \App\Livewire\Dashboard::class)->name('dashboard');
+    // Dashboard
+    Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
 
     // Pacientes
     Route::resource('pacientes', PacienteController::class);
