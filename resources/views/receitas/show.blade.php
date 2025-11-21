@@ -20,7 +20,7 @@
                     Receita #{{ $receita->id }}
                 </h1>
                 <p class="page-subtitle">
-                    {{ $receita->medicamento }} - {{ $receita->paciente->nome }}
+                    {{ Str::limit($receita->medicamentos, 50) }} - {{ $receita->paciente->nome }}
                 </p>
             </div>
             <div class="d-flex gap-2">
@@ -51,37 +51,10 @@
                     </h5>
                 </div>
                 <div class="card-body">
-                    <div class="row g-3">
-                        <div class="col-md-8">
-                            <label class="form-label text-muted">Nome do Medicamento</label>
-                            <div class="fw-bold fs-5">{{ $receita->medicamento }}</div>
-                            @if ($receita->principio_ativo)
-                                <small class="text-muted">Princípio Ativo: {{ $receita->principio_ativo }}</small>
-                            @endif
+                        <div class="col-md-12">
+                            <label class="form-label text-muted">Medicamentos</label>
+                            <div class="fw-bold fs-5">{!! nl2br(e($receita->medicamentos)) !!}</div>
                         </div>
-
-                        @if ($receita->forma_farmaceutica)
-                            <div class="col-md-4">
-                                <label class="form-label text-muted">Forma Farmacêutica</label>
-                                <div class="fw-bold">
-                                    <span class="badge bg-info fs-6">{{ ucfirst($receita->forma_farmaceutica) }}</span>
-                                </div>
-                            </div>
-                        @endif
-
-                        @if ($receita->concentracao)
-                            <div class="col-md-6">
-                                <label class="form-label text-muted">Concentração</label>
-                                <div class="fw-bold">{{ $receita->concentracao }}</div>
-                            </div>
-                        @endif
-
-                        @if ($receita->quantidade)
-                            <div class="col-md-6">
-                                <label class="form-label text-muted">Quantidade Total</label>
-                                <div class="fw-bold">{{ $receita->quantidade }}</div>
-                            </div>
-                        @endif
                     </div>
                 </div>
             </div>
@@ -96,26 +69,11 @@
                 </div>
                 <div class="card-body">
                     <div class="row g-3">
-                        <div class="col-md-4">
-                            <label class="form-label text-muted">Dosagem</label>
+                        <div class="col-md-12">
                             <div class="fw-bold">
-                                <span class="badge bg-primary fs-6">{{ $receita->dosagem }}</span>
+                                {!! nl2br(e($receita->posologia)) !!}
                             </div>
                         </div>
-
-                        <div class="col-md-4">
-                            <label class="form-label text-muted">Frequência</label>
-                            <div class="fw-bold">
-                                <span class="badge bg-secondary fs-6">{{ $receita->frequencia }}</span>
-                            </div>
-                        </div>
-
-                        @if ($receita->duracao)
-                            <div class="col-md-4">
-                                <label class="form-label text-muted">Duração do Tratamento</label>
-                                <div class="fw-bold">{{ $receita->duracao }}</div>
-                            </div>
-                        @endif
 
                         @if ($receita->via_administracao)
                             <div class="col-md-6">
